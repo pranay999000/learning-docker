@@ -1,0 +1,27 @@
+version: '3'
+services:
+  node-project:
+    build:
+      context: .
+      args:
+        NODE_ENV: devlopment
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    # environment:
+    #   - PORT=3000
+    env_file:
+      - ./.env
+  
+  database:
+    image: mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=database
+      - MONGO_INITDB_ROOT_PASSWORD=duracell
+    volumes:
+      - mongo-db:/data/db
+
+volumes:
+  mongo-db:
